@@ -3,10 +3,11 @@ from pycaret.regression import *
 import pandas as pd
 import pickle
 import numpy as np
+import math
 
 app = Flask(__name__)
 
-model = load_model('deployment_28042020')
+model = load_model('gradboostregModel')
 cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
 
 @app.route('/')
@@ -19,8 +20,9 @@ def predict():
     final = np.array(int_features)
     data_unseen = pd.DataFrame([final], columns = cols)
     prediction = predict_model(model, data=data_unseen, round = 0)
-    prediction = int(prediction.Label[0])
-    return render_template('home.html',pred='Expected Bill will be {}'.format(prediction))
+    #prediction = int(prediction.Label[0])
+    prediction = math.ceil(prediction['prediction_label'][0])
+    return render_template('home.html',pred='Expected Bill will be $ {}'.format(prediction))
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
