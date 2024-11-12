@@ -56,11 +56,6 @@ EDIT inbound rules of firewall to access to the  ML web app and make predictions
 ML web app in action
 
 
-
-
-Another Tutorial :
-https://pycaret.gitbook.io/docs/learn-pycaret/official-blog/deploy-pycaret-and-streamlit-on-aws-fargate
-
 Launch docker
 
 1) open a git bash 
